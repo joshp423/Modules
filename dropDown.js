@@ -2,18 +2,17 @@
 //An array of objects with name as the name of the dropdown item
 //and href as the href link 
 
-let items = [{name: nav1, href: "www.google.com"}, {name: nav2, href: "www.google.com"}, {name: nav3, href: "www.google.com"}]
-export function createDropDown(items) {
+export function createDropDown(items, buttonTitle) {
   //create div and button and add to nav
   const dropDownButton = document.createElement("button");
+  dropDownButton.innerText = buttonTitle;
   const dropDownDiv = document.createElement("div");
   const nav = document.querySelector("nav");
-
-  nav.appendChild(dropDownDiv);
-  dropDownDiv.append(dropDownButton);
+  let active = 0;
+  nav.append(dropDownButton, dropDownDiv)
 
   //change dropdown to be flex
-  dropDownDiv.style.display = "flex";
+  dropDownDiv.style.display = "none";
   dropDownDiv.style.flexDirection = "column";
 
   //loop through items to create correct amount of a links
@@ -26,6 +25,16 @@ export function createDropDown(items) {
   }
 
   //event listener for button 
-
-
+  dropDownButton.addEventListener('click', () => {
+    if (active === 0) {
+      dropDownDiv.style.display = "flex";
+      active = 1;
+      return;
+    }
+    else {
+      dropDownDiv.style.display = "none"
+      active = 0;
+      return;
+    }
+  })
 }

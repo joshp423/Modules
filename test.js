@@ -29,7 +29,7 @@ function createCarousel(images, locationDiv){
         currentImage.src = image.src;
         currentImage.id = image.name;
         currentImage.style.height = "1080px";
-        currentImage.style.width = "1080px";
+        currentImage.style.width = "1920px";
         
         if (image === images[0]) {
             currentImage.classList.add("active");
@@ -62,7 +62,7 @@ function createCarousel(images, locationDiv){
                 image.style.display = "none";
             }
         })
-        
+
     leftButton.addEventListener('click', () => {
         if (activeImage === 0) {
             activeImage = onPageImages.length-1;

@@ -1,7 +1,7 @@
 const container = document.getElementById('container');
 const images = [{name:"image1", src:"./360_F_123522471_XZe5ebqil1DFJRgOUJ6taDP4DnmHjtL7.jpg"}, {name:"image2", src:"./im-54002859.avif"}, {name:"image3", src:"./images.jpeg"}];
 
-function createCarousel(images, locationDiv){
+export function createCarousel(images, locationDiv){
     //set up divs
     const outerDiv = document.createElement('div');
     outerDiv.style.display = 'grid';
@@ -118,4 +118,3 @@ function createCarousel(images, locationDiv){
     
         
 }
-createCarousel(images, container);

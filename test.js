@@ -3,6 +3,7 @@ const images = [{name:"image1", src:"./360_F_123522471_XZe5ebqil1DFJRgOUJ6taDP4D
 
 function createCarousel(images, locationDiv){
     //set up divs
+    const carouselContainer = document.createElement('div');
     const outerDiv = document.createElement('div');
     outerDiv.style.display = 'grid';
     outerDiv.style.gridTemplateColumns = "1fr 8fr 1fr";
@@ -10,7 +11,11 @@ function createCarousel(images, locationDiv){
 
     const innerDiv = document.createElement('div');
     
-    
+    const buttonDiv = document.createElement('div');
+    buttonDiv.style.display = "flex";
+    buttonDiv.style.justifyContent = "center";
+    buttonDiv.id = "circleButtons";
+
     //set up buttons
     const leftButton = document.createElement('button');
     leftButton.style.height = "100%";
@@ -20,32 +25,41 @@ function createCarousel(images, locationDiv){
     rightButton.innerText = ">";
 
     //append elements
-    locationDiv.append(outerDiv);
+    locationDiv.append(carouselContainer);
+    carouselContainer.append(outerDiv, buttonDiv)
     outerDiv.append(leftButton, innerDiv, rightButton);
 
-    //loop through images and add each image
+    //loop through images and add each image as well as corresponding buttons
     images.forEach((image) => {
-        let currentImage = document.createElement('img')
+        let currentImage = document.createElement('img');
         currentImage.src = image.src;
         currentImage.id = image.name;
         currentImage.style.height = "1080px";
         currentImage.style.width = "1920px";
-        
+
+        //buttons
+        let button = document.createElement('button')
+        button.style.border = "1px solid black";
+        button.style.borderRadius = "180px";
+        button.style.height = "20px";
+        button.style.width = "20px";
+        button.style.backgroundColor = "white";
+        button.style
+
         if (image === images[0]) {
             currentImage.classList.add("active");
+            button.classList.add("active");
         }
-        if (currentImage.classList.contains("inactive")) {
-            currentImage.style.display = "none";
-        }
-        else {
-            currentImage.style.display = "";
-        }
+        
         innerDiv.append(currentImage);
+        buttonDiv.append(button);
+        
     })
 
     //attach event listeners to buttons
     let activeImage = 0;
-    const onPageImages = document.querySelectorAll('#container>div>div>img');
+    const onPageImages = document.querySelectorAll('#container>div>div>div>img');
+    const buttons = document.querySelectorAll('#circleButtons>button')
 
     //depending on activeImage change display settings
         onPageImages.forEach((image) => {
@@ -63,6 +77,21 @@ function createCarousel(images, locationDiv){
             }
         })
 
+    //depending on activeimage change button background
+    buttons.forEach((button) => {
+        if (button === button[activeImage]) {
+            button.classList.add("active");
+        }
+        else {
+            button.classList.remove("active")
+        }
+        if (button.classList.contains("active")) {
+            button.style.backgroundColor = "black";
+        }
+        else {
+            button.style.backgroundColor = "white";
+        }
+    })
     leftButton.addEventListener('click', () => {
         if (activeImage === 0) {
             activeImage = onPageImages.length-1;
